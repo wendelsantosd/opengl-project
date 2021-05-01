@@ -13,7 +13,6 @@ import renderEngine.OBJLoader;
 import renderEngine.Renderer;
 import shaders.StaticShader;
 import textures.ModelTexture;
-import entities.Camera;
 import entities.Entity;
 import entities.Light;
 
@@ -29,13 +28,12 @@ public class MainGameLoop {
 		//RawModel model = loader.loadToVAO(vertices,textureCoords,indices);
 		RawModel model = OBJLoader.loadObjModel("dragon", loader);
 		
-		//TexturedModel staticModel = new TexturedModel(model,new ModelTexture(loader.loadTexture("white")));
-		TexturedModel staticModel = new TexturedModel(model,new ModelTexture(loader.loadTexture("image")));
+		TexturedModel staticModel = new TexturedModel(model,new ModelTexture(loader.loadTexture("white")));
+		//TexturedModel staticModel = new TexturedModel(model,new ModelTexture(loader.loadTexture("image")));
 
 		Entity entity = new Entity(staticModel, new Vector3f(0,0,-25),0,0,0,1);
 		Light light = new Light(new Vector3f(0,0,-20), new Vector3f(1,1,1));
 		
-		Camera camera = new Camera();
 		
 		while(!Display.isCloseRequested()){
 			if(Keyboard.isKeyDown(Keyboard.KEY_X)){
@@ -53,12 +51,29 @@ public class MainGameLoop {
 			if(Keyboard.isKeyDown(Keyboard.KEY_L)){
 				entity.setScale(0.005f);
 			}
+			if(Keyboard.isKeyDown(Keyboard.KEY_E)){
+				entity.increasePosition(0, 0, -0.1f);
+			}
+			if(Keyboard.isKeyDown(Keyboard.KEY_Q)){
+				entity.increasePosition(0, 0, 0.1f);
+			}
+			if(Keyboard.isKeyDown(Keyboard.KEY_W)){
+				entity.increasePosition(0, 0.1f,0 );
+			}
+			if(Keyboard.isKeyDown(Keyboard.KEY_S)){
+				entity.increasePosition(0, -0.1f, 0);
+				}
+			if(Keyboard.isKeyDown(Keyboard.KEY_A)){
+				entity.increasePosition(-0.1f, 0, 0);
+				}
+			if(Keyboard.isKeyDown(Keyboard.KEY_D)){
 			
-			camera.move();
+				entity.increasePosition(0.1f, 0, 0);
+			}
+			//entity.increaseRotation(1, 1, 0);
 			renderer.prepare();
 			shader.start();
 			shader.loadLight(light);
-			shader.loadViewMatrix(camera);
 			renderer.render(entity,shader);
 			shader.stop();
 			DisplayManager.updateDisplay();
