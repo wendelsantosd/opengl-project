@@ -29,8 +29,9 @@ public class MainGameLoop {
 		//RawModel model = loader.loadToVAO(vertices,textureCoords,indices);
 		RawModel model = OBJLoader.loadObjModel("dragon", loader);
 		
-		TexturedModel staticModel = new TexturedModel(model,new ModelTexture(loader.loadTexture("white")));
-		
+		//TexturedModel staticModel = new TexturedModel(model,new ModelTexture(loader.loadTexture("white")));
+		TexturedModel staticModel = new TexturedModel(model,new ModelTexture(loader.loadTexture("image")));
+
 		Entity entity = new Entity(staticModel, new Vector3f(0,0,-25),0,0,0,1);
 		Light light = new Light(new Vector3f(0,0,-20), new Vector3f(1,1,1));
 		
@@ -46,6 +47,13 @@ public class MainGameLoop {
 			if(Keyboard.isKeyDown(Keyboard.KEY_Z)){
 				entity.increaseRotation(0, 0, 1);
 			}
+			if(Keyboard.isKeyDown(Keyboard.KEY_K)){
+				entity.setScale(-0.005f);
+			}
+			if(Keyboard.isKeyDown(Keyboard.KEY_L)){
+				entity.setScale(0.005f);
+			}
+			
 			camera.move();
 			renderer.prepare();
 			shader.start();
