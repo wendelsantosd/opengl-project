@@ -34,6 +34,7 @@ public class Renderer {
 		GL11.glEnable(GL11.GL_DEPTH_TEST);
 		GL11.glClear(GL11.GL_COLOR_BUFFER_BIT|GL11.GL_DEPTH_BUFFER_BIT);
 		GL11.glClearColor(0, 0.3f, 0.0f, 1);
+		//GL11.glClearColor(1, 0, 0, 1);
 	}
 
 	public void render(Entity entity, StaticShader shader) {

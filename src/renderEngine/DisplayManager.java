@@ -9,19 +9,16 @@ import org.lwjgl.opengl.PixelFormat;
 
 public class DisplayManager {
 	
-	private static final int WIDTH = 1280;
-	private static final int HEIGHT = 720;
+	private static final int WIDTH = 1920;
+	private static final int HEIGHT = 1080;
 	private static final int FPS_CAP = 120;
 	
-	public static void createDisplay(){		
-		ContextAttribs attribs = new ContextAttribs(3,2)
-		.withForwardCompatible(true)
-		.withProfileCore(true);
+	public static void createDisplay(){
 		
 		try {
 			Display.setDisplayMode(new DisplayMode(WIDTH,HEIGHT));
-			Display.create(new PixelFormat(), attribs);
-			Display.setTitle("Final Project");
+			Display.create(new PixelFormat());
+			Display.setTitle("Final Project - 3D Model");
 		} catch (LWJGLException e) {
 			e.printStackTrace();
 		}
